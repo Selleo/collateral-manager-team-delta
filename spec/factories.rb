@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :tag do
+
+  end
+
   factory :collateral do
 
   end
