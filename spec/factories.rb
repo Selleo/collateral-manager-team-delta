@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :collateral_tag do
+    collateral_id { "" }
+    tag_id { "" }
+    weight { "" }
+  end
+
   factory :tag do
 
   end
