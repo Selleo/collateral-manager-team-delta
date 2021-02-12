@@ -12,6 +12,7 @@ gem "bootsnap", require: false
 gem 'bourbon', '>= 6.0.0'
 gem 'delayed_job_active_record'
 gem 'devise'
+
 gem 'inline_svg'
 gem 'high_voltage'
 gem 'oj'
@@ -35,6 +36,8 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'standard'
+  gem 'faker'
+  gem 'rubocop'
 end
 
 group :development, :test do
