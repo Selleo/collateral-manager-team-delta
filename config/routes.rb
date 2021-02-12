@@ -4,14 +4,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :collaterals, only: [:show, :index, :create]
-      resources :tags, only: [:show, :index, :create]
+      resources :tags, only: [:index, :create]
     end
   end
 end
 
-
-  # devise_for :tags
-  #   get 'api/v1/tags/index'
-  #   post 'api/v1/tags/add'
-  # end
 
