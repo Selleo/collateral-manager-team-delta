@@ -2,31 +2,35 @@ module Api
   module V1
     class CollateralsController < ApplicationController
       skip_before_action :verify_authenticity_token
+
       def index
-        render json: collection
+        render json: Collaterals::IndexService.call
       end
 
       def show
-        collateral = Collateral.find_by!(id: params[:id])
         render json: collateral
       end
 
       def create
-        collateral = Collaterals::CreateService.call(create_params)
-        render json: collateral
+        render json: Collaterals::CreateService.call(collateral_params)
+      end
+
+      def update
+        render json: Collaterals::UpdateService.call(collateral, collateral_params)
+      end
+
+      def destroy
+        collateral.destroy
+        render json: true
       end
 
       private
-      def collection
-        Collateral.all.map do |collateral|
-          {
-            **collateral.attributes.symbolize_keys.slice(:id, :name, :kind, :url),
-          }
-        end
+      def collateral_params
+        params.require(:data).permit(attributes: [:name, :kind, :url])
       end
 
-      def create_params
-        params.require(:data).permit(attributes: [:name, :kind, :url])
+      def collateral
+        Collateral.find(params[:id])
       end
     end
   end

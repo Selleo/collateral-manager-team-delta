@@ -1,16 +1,18 @@
 module Collaterals
   class CreateService
     def initialize(data)
-    @data = data
+      @data = data
+    end
+
+    def self.call(data)
+      new(data).call
     end
 
     def call
-      create_collateral
+      Collateral.create(data)
     end
 
     private
-    def create_collateral
-      Collateral.create(@data).save
-    end
+    attr_reader :data
   end
 end
