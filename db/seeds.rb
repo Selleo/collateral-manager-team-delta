@@ -14,7 +14,6 @@ TAGS_COUNT = 150
 def generate_tech_tag_ids techTags
     
     techTagIds = []
-
     for techTag in techTags do 
         t = Tag.new(name: techTag)
         t.save
