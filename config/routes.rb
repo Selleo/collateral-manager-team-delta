@@ -7,8 +7,5 @@ Rails.application.routes.draw do
       resources :tags, only: [:index, :create]
     end
   end
-  # namespace :views do
     resources :tags, only: [:index]
-  # end
-  # root to: "tags#index"
 end
