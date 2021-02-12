@@ -4,6 +4,7 @@ module Api
             skip_before_action :verify_authenticity_token
 
             def index
+                @tags = Tag.all
                 render json: Tag.all
             end
 

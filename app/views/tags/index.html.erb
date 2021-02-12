@@ -1,6 +1,11 @@
+  <div class="columns mt-6 is-centered">
+    <% @tags.each do |tag| %>
+    <div class="column is-one-quarter">
+      <div class="card">
 
+            Test <%= tag.name %>
 
-<div class="">
-
-</div>
-
+      </div>
+    </div>
+    <% end %>
+  </div>
