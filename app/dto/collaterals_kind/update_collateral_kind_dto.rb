@@ -1,5 +1,5 @@
 module CollateralsKind
-  class CreateCollateralKindDto
+  class UpdateCollateralKindDto
     def initialize(name, color)
       @name = name
       @color = color

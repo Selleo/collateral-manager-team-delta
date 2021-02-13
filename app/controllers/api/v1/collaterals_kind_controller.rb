@@ -1,16 +1,24 @@
-class Api::V1::CollateralsKindController < ApplicationController
-  def index
-    response = [
-      { id: 1, name: "Name1", color: "#fff000" },
-      { id: 3, name: "Name2", color: "#fff000" }
-    ]
+module Api
+  module V1
+    class CollateralsKindController < ApplicationController
+      def index
+        render json: CollateralsKind::IndexService.call
+      end
 
-    render :json => response
-  end
+      def create
+        data = params.require(:data).permit(attributes: [:name, :color])['attributes']
+        dto = CollateralsKind::CreateCollateralKindDto.new(data['name'], data['color'])
 
-  def create
-    create_dto = create_dto_from_body(CreateCollateralKindDto.new)
+        render json: CollateralsKind::CreateService.call(dto)
+      end
 
-    render :json => create_dto
+      def update
+        collateral_kind = CollateralKind.find(params[:id])
+        data = params.require(:data).permit(attributes: [:name, :color])['attributes']
+        dto = CollateralsKind::UpdateCollateralKindDto.new(data['name'], data['color'])
+
+        render json: CollateralsKind::UpdateService.call(collateral_kind, dto)
+      end
+    end
   end
 end

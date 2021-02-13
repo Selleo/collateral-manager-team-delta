@@ -1,4 +1,4 @@
-module Collaterals
+module Tags
   class CreateService
     def initialize(dto)
       @dto = dto
@@ -9,11 +9,7 @@ module Collaterals
     end
 
     def call
-      Collateral.create(
-        name: dto.get_name,
-        collateral_kinds_id: dto.get_kind_id,
-        url: dto.get_url
-      )
+      Tag.create(name: dto.get_name, color: dto.get_color)
     end
 
     private

@@ -1,5 +1,5 @@
-module CollateralsKind
-  class CreateCollateralKindDto
+module Tags
+  class CreateTagDto
     def initialize(name, color)
       @name = name
       @color = color
