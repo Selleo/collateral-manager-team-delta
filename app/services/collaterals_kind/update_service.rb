@@ -10,8 +10,8 @@ module CollateralsKind
     end
 
     def call
-      @collateral_kind.update(name: dto.get_name, color: dto.get_color)
-      @collateral_kind
+      collateral_kind.update(name: dto.get_name, color: dto.get_color)
+      collateral_kind
     end
 
     private

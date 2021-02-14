@@ -10,8 +10,8 @@ module Tags
     end
 
     def call
-      @tag.update(name: dto.get_name, color: dto.get_color)
-      @tag
+      tag.update(name: dto.get_name, color: dto.get_color)
+      tag
     end
 
     private
