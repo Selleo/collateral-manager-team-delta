@@ -7,12 +7,4 @@ class ApplicationController < ActionController::Base
   def record_not_found
     head :not_found
   end
-
-  def create_dto_from_body(class_dto)
-    return class_dto::create(request.body.read)
-  end
-
-  def create_dto_from_params(class_dto)
-    return class_dto::create(request.params)
-  end
 end

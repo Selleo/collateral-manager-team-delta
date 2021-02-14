@@ -13,7 +13,7 @@ module Api
 
       def create
         data = params.require(:data).permit(attributes: [:name, :kind_id, :url])['attributes']
-        dto = Collaterals::CreateCollateralDto.new(data['name'], data['kind_id'], data['url'])
+        dto = Collaterals::CreateCollateralDto.new(data)
 
         render json: Collaterals::CreateService.call(dto)
       end
@@ -21,7 +21,7 @@ module Api
       def update
         collateral = Collateral.find(params[:id])
         data = params.require(:data).permit(attributes: [:name, :kind_id, :url])['attributes']
-        dto = Collaterals::CreateCollateralDto.new(data['name'], data['kind_id'], data['url'])
+        dto = Collaterals::UpdateCollateralDto.new(data)
 
         render json: Collaterals::UpdateService.call(collateral, dto)
       end

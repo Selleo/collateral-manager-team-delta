@@ -9,7 +9,7 @@ module Collaterals
     end
 
     def call
-      Collateral.find(@collateral_id)
+      Collateral.find(collateral_id)
     end
 
     private

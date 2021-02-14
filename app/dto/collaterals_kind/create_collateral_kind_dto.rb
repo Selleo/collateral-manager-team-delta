@@ -1,22 +1,19 @@
 module CollateralsKind
   class CreateCollateralKindDto
-    def initialize(name, color)
-      @name = name
-      @color = color
+    def initialize(data)
+      @name = data['name']
+      @color = data['color']
     end
 
     def get_name
-      @name
+      name
     end
 
     def get_color
-      @color
+      color
     end
 
-    attr_reader :name
-    attr_reader :color
-
-    private :name
-    private :color
+    private
+    attr_reader :name, :color
   end
 end
