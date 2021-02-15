@@ -7,13 +7,6 @@ module Api
                 render json: Tags::IndexService.call
             end
 
-            # def create
-            #     tag_name = params[:name]
-            #     tag = Tag.new({name: tag_name})
-            #     tag.save
-            #     render json: tag
-            # end
-
             def create
                 render json: Tags::CreateService.call(tag_params)
             end

@@ -1,5 +1,6 @@
 module Collaterals
   class CreateService
+
     def initialize(data)
       @data = data
     end
