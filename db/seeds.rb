@@ -9,6 +9,7 @@
 require 'faker'
 
 COLLATERALS_COUNT = 50
+LEADS_COUNT = 10
 TAGS_COUNT = 150
 
 def generate_collateral_kinds
@@ -118,6 +119,43 @@ def seed_collaterals
     i += 1
   end
 
+  i = 0
+  while i < LEADS_COUNT
+    new_lead = Lead.new({
+                          name: "#{Faker::App.name}",
+                          description: Faker::Lorem.paragraphs,
+                        })
+    new_lead.save
+
+    i += 1
+  end
+
+  Lead.find_each do |lead|
+    tag_id = tech_tag_ids.to_a.shuffle.first
+
+    new_lead_tag = LeadTag.new({
+                                 tag_id: tag_id,
+                                 lead_id: lead.id,
+                                 position: 0
+                               })
+    new_lead_tag.save
+
+    random_tags_count = rand(1..8)
+    i = 0
+    index = 1
+    while i < random_tags_count
+      random_tag_id = tag_ids.to_a.shuffle.first
+
+      LeadTag.create({
+                       tag_id: random_tag_id,
+                       lead_id: lead.id,
+                       position: index
+                     })
+      index += 1
+      i += 1
+    end
+  end
+
   Collateral.find_each do |c|
     random_tag_ids = tech_tag_ids.to_a.shuffle.take(rand(1..3))
     for tech_tag_id in random_tag_ids do
@@ -142,9 +180,14 @@ def seed_collaterals
 
   puts '==========================================================================================='
   puts 'DB Seed: Ready.'
-  puts "Collateral count = #{Collateral.count}, Tag count = #{Tag.count}, CollateralTag: #{CollateralTag.count} CollateralKind: #{CollateralKind.count}"
+  puts "Collaterals: #{Collateral.count}"
+  puts "Tags: #{Tag.count}"
+  puts "CollateralTags: #{CollateralTag.count}"
+  puts "CollateralKinds: #{CollateralKind.count}"
+  puts "Leads: #{Lead.count}"
+  puts "LeadTags: #{LeadTag.count}"
   puts '==========================================================================================='
 end
 
 seed_collaterals
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
