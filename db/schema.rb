@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_161444) do
+ActiveRecord::Schema.define(version: 2021_02_10_180209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collateral_kinds", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "color", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "collateral_tags", force: :cascade do |t|
     t.bigint "collateral_id", null: false
@@ -26,11 +33,12 @@ ActiveRecord::Schema.define(version: 2021_02_11_161444) do
   end
 
   create_table "collaterals", force: :cascade do |t|
+    t.bigint "collateral_kinds_id", null: false
     t.text "name", null: false
     t.text "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "kind", default: "", null: false
+    t.index ["collateral_kinds_id"], name: "index_collaterals_on_collateral_kinds_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -50,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_161444) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
+    t.string "color", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -66,4 +75,5 @@ ActiveRecord::Schema.define(version: 2021_02_11_161444) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "collaterals", "collateral_kinds", column: "collateral_kinds_id"
 end
