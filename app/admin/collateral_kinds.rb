@@ -1,18 +1,20 @@
 ActiveAdmin.register CollateralKind do
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :name, :color
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :color]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+  index do |i|
+    selectable_column
+
+    column :name do |n| 
+      
+    end
+    column :color
+    column :color do |c|
+      raw "<span class=\"colorfull\" style=\"background:#{c.color}\"></span>"
+    end
+  end
+
+  #permit_params :name, :color
+  permit_params do
+    permitted = [:name, :color]
+  end
+
 end
