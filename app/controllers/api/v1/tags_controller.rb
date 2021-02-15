@@ -1,18 +1,24 @@
 module Api
-    module V1
-        class TagsController < ApplicationController
-            skip_before_action :verify_authenticity_token
+  module V1
+    class TagsController < ApplicationController
+      def index
+        render json: Tags::IndexService.call
+      end
 
-            def index
-                render json: Tag.all
-            end
+      def create
+        data = params.require(:data).permit(attributes: [:name, :color])['attributes']
+        dto = Tags::CreateTagDto.new(data)
 
-            def create
-                tag_name = params[:name]
-                tag = Tag.new({name: tag_name})
-                tag.save
-                render json: tag
-            end
-        end
+        render json: Tags::CreateService.call(dto)
+      end
+
+      def update
+        tag = Tag.find(params[:id])
+        data = params.require(:data).permit(attributes: [:name, :color])['attributes']
+        dto = Tags::UpdateTagDto.new(data)
+
+        render json: Tags::UpdateService.call(tag, dto)
+      end
     end
+  end
 end

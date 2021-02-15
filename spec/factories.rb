@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :collateral_kind do
+    collateral { nil }
+  end
+
   factory :collateral_tag do
     collateral_id { "" }
     tag_id { "" }
