@@ -147,3 +147,4 @@ def seed_collaterals
 end
 
 seed_collaterals
+User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
