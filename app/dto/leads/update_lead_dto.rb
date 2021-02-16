@@ -1,8 +1,7 @@
-module Collaterals
-  class ListFiltersDto
+module Tags
+  class UpdateLeadDto
     def initialize(data)
-      @kind = data['kind']
-      @url = data['url']
+      @name = data['name']
       @tags = []
 
       data['tags'].each do |tag|
@@ -11,6 +10,6 @@ module Collaterals
     end
 
     private
-    attr_reader :tags, :url, :kind_id
+    attr_reader :name, :color
   end
 end
