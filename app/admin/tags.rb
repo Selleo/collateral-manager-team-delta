@@ -1,18 +1,17 @@
 ActiveAdmin.register Tag do
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :name, :color
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :color]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+  permit_params :name, :color
+  # filter :first_name_or_last_name_cont, as: :string, label: "Name"
+  filter :name, as: :check_boxes
+
+  index do
+    id_column
+    column :name
+    column :color do |tag|
+      raw "<div class=\"color-full\" style=\"background-color: #{tag.color}\"></div>"
+    end
+    actions
+  end
+
+
 end
