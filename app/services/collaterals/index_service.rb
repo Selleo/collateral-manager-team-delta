@@ -9,10 +9,13 @@ module Collaterals
     end
 
     private
+
     def collection
+      # Collateral.includes(:collateral_kind).all
+
       Collateral.all.map do |collateral|
         {
-          **collateral.attributes.symbolize_keys.slice(:id, :name, :kind, :url),
+          **collateral.attributes.symbolize_keys.slice(:id, :name, :collateral_kind_id, :url),
         }
       end
     end

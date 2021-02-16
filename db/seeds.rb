@@ -112,7 +112,7 @@ def seed_collaterals
     new_collateral = Collateral.new({
                                       name: "#{Faker::App.name} #{Faker::App.name}",
                                       url: Faker::Internet.url(host: Faker::Internet.unique.domain_name),
-                                      collateral_kinds_id: random_kind_id
+                                      collateral_kind_id: random_kind_id
                                     })
     new_collateral.save
 
