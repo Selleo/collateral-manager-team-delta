@@ -1,5 +1,7 @@
 ActiveAdmin.register Tag do
 
+  config.create_another = true
+
   permit_params :name, :color
   filter :name
   filter :color
