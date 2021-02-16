@@ -1,4 +1,4 @@
 class Collateral < ApplicationRecord
-  belongs_to :collateral_kind, class_name: "CollateralKind", foreign_key: :collateral_kinds_id
+  belongs_to :collateral_kind
   validates :name, presence: true
 end
