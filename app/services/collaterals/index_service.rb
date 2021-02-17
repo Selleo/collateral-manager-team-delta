@@ -20,12 +20,7 @@ module Collaterals
             name: collateral.collateral_kind.name,
             color: collateral.collateral_kind.color
           },
-          tags: collateral.collateral_tags.map do |collateral_tag|
-            {
-              name: collateral_tag.tag.name,
-              color: collateral_tag.tag.color
-            }
-          end
+          tags: collateral.tags.map {|c| c.slice(:name, :color) }
         }
       end
     end
