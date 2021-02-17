@@ -33,6 +33,9 @@ gem 'cancancan'
 gem 'draper'
 gem 'pundit'
 gem 'rack-cors'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 
 group :development do
   gem "web-console"
