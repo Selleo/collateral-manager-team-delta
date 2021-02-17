@@ -20,7 +20,7 @@ ActiveAdmin.register Collateral do
   end
 
   permit_params do
-    permitted = [:name, :color, :actions]
+    permitted = [:name, :color, :actions, :url, :collateral_kind_id]
   end
   
 end
