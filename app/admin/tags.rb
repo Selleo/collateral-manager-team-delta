@@ -8,11 +8,11 @@ ActiveAdmin.register Tag do
   actions :all, :except => [:show]
 
   index do
-    id_column
-    column :name
-    column :color do |tag|
-      raw "<div class=\"colorfull\" style=\"background-color: #{tag.color}\">#{tag.name}</div>"
+    selectable_column
+    column :name do |n|
+      raw "<span class=\"colorfull\" style=\"background:#{n.color}\">#{n.name}</span>"
     end
+    column :color
     actions
   end
 end
