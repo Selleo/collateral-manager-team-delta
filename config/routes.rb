@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :collaterals, only: [:show, :index, :create, :update, :destroy]
-      resources :tags, only: [:index, :create, :update]
-      resources :collaterals_kind, only: [:index, :create, :update]
+      resources :tags, only: [:index, :create, :update, :destroy]
+      resources :collateral_kinds, only: [:index, :create, :update, :destroy]
       resources :leads, only: [:index, :create]
     end
   end

@@ -6,7 +6,6 @@ module Collaterals
       @url = data['url']
     end
 
-    private
     attr_reader :name, :url, :kind_id
   end
 end

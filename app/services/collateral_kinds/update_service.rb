@@ -1,4 +1,4 @@
-module CollateralsKind
+module CollateralKinds
   class UpdateService
     def initialize(collateral_kind, dto)
       @collateral_kind = collateral_kind
@@ -10,7 +10,7 @@ module CollateralsKind
     end
 
     def call
-      collateral_kind.update(name: dto.get_name, color: dto.get_color)
+      collateral_kind.update(name: dto.name, color: dto.color)
       collateral_kind
     end
 

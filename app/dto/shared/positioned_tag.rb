@@ -5,7 +5,6 @@ module Shared
       @position = data['position']
     end
 
-    private
     attr_reader :tag_id, :position
   end
 end

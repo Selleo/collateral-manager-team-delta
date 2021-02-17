@@ -1,4 +1,4 @@
-module CollateralsKind
+module CollateralKinds
   class CreateService
     def initialize(dto)
       @dto = dto
@@ -9,7 +9,7 @@ module CollateralsKind
     end
 
     def call
-      CollateralKind.create(name: dto.get_name, color: dto.get_color)
+      CollateralKind.create(name: dto.name, color: dto.color)
     end
 
     private

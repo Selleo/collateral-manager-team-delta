@@ -10,7 +10,6 @@ module Collaterals
       end
     end
 
-    private
     attr_reader :tags, :url, :kind_id
   end
 end
