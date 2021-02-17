@@ -1,7 +1,7 @@
 ActiveAdmin.register CollateralKind do
   filter :name
   filter :color
-  #actions :index, :show, :new, :create, :update, :edit
+  actions :index, :new, :create, :update, :edit, :destroy
 
   index do |i|
     selectable_column
