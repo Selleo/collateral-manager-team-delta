@@ -3,7 +3,7 @@ ActiveAdmin.register Collateral do
   filter :collateral_kinds_id
   filter :name
   
-  actions :index, :new, :create, :update, :edit, :destroy
+  actions :index, :show, :new, :create, :update, :edit, :destroy
 
   index do |i|
     selectable_column
