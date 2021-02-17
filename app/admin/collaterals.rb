@@ -1,6 +1,6 @@
 ActiveAdmin.register Collateral do
 
-  filter :collateral_kinds_id
+  filter :collateral_kind, :as => :check_boxes
   filter :name
   
   actions :index, :show, :new, :create, :update, :edit, :destroy
