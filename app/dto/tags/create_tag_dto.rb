@@ -5,7 +5,6 @@ module Tags
       @color = data['color']
     end
 
-    private
     attr_reader :name, :color
   end
 end

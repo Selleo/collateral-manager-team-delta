@@ -19,6 +19,13 @@ module Api
 
         render json: Tags::UpdateService.call(tag, dto)
       end
+
+      def destroy
+        tag = Tag.find(params[:id])
+        Tags::DestroyService.call(tag)
+
+        render json: true
+      end
     end
   end
 end

@@ -32,6 +32,7 @@ gem 'activeadmin'
 gem 'cancancan'
 gem 'draper'
 gem 'pundit'
+gem 'rack-cors'
 
 group :development do
   gem "web-console"

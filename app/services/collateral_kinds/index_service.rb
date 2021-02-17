@@ -1,4 +1,4 @@
-module CollateralsKind
+module CollateralKinds
   class IndexService
     def self.call
       new.call

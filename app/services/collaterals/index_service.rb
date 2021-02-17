@@ -11,11 +11,21 @@ module Collaterals
     private
 
     def collection
-      # Collateral.includes(:collateral_kind).all
-
       Collateral.all.map do |collateral|
         {
-          **collateral.attributes.symbolize_keys.slice(:id, :name, :collateral_kind_id, :url),
+          id: collateral.id,
+          name: collateral.name,
+          url: collateral.url,
+          kind: {
+            name: collateral.collateral_kind.name,
+            color: collateral.collateral_kind.color
+          },
+          tags: collateral.collateral_tags.map do |collateral_tag|
+            {
+              name: collateral_tag.tag.name,
+              color: collateral_tag.tag.color
+            }
+          end
         }
       end
     end

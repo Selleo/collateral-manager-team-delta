@@ -10,7 +10,6 @@ module Tags
       end
     end
 
-    private
     attr_reader :name, :color
   end
 end
