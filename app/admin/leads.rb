@@ -27,14 +27,28 @@ ActiveAdmin.register Lead do
       f.semantic_errors *f.object.errors.keys
       f.input :name
       f.input :description
-      if f.object.persisted?
-        f.has_many :lead_tags do |lead_tag_form|
-          lead_tag_form.input :tag_id, collection: Tag.all, as: :select
-          lead_tag_form.input :position
-          lead_tag_form.input :lead_id, :input_html => { :value => f.object.id }, as: :hidden
+
+      # NOTE: PoC only
+        # ul id: "sortable" do
+        #   li id: "1", class: "drag ui-state-default ui-icon ui-icon-arrowthick-2-n-s", style: "height: 50px; border: 2px solid red;"
+        #   li id: "2", class: "drag ui-state-default ui-icon ui-icon-arrowthick-2-n-s", style: "height: 50px; border: 2px solid red;"
+        #   li id: "3", class: "drag ui-state-default ui-icon ui-icon-arrowthick-2-n-s", style: "height: 50px; border: 2px solid red;"
+        #   li id: "4", class: "drag ui-state-default ui-icon ui-icon-arrowthick-2-n-s", style: "height: 50px; border: 2px solid red;"
+        #   li id: "5", class: "drag ui-state-default ui-icon ui-icon-arrowthick-2-n-s", style: "height: 50px; border: 2px solid red;"
+        #   li id: "6", class: "drag ui-state-default ui-icon ui-icon-arrowthick-2-n-s", style: "height: 50px; border: 2px solid red;"
+        #   li id: "7", class: "drag ui-state-default ui-icon ui-icon-arrowthick-2-n-s", style: "height: 50px; border: 2px solid red;"
+        # end
+
+        if f.object.persisted?
+          f.has_many :lead_tags, class: "sortable" do |lead_tag_form|
+              lead_tag_form.input :tag_id, collection: Tag.all, as: :select
+              lead_tag_form.input :position
+              lead_tag_form.input :lead_id, :input_html => { :value => f.object.id }, as: :hidden, class: "drag"
+          end
         end
-      end
-        f.button :submit
+      # end
+
+      f.button :submit
     end
   end
 
