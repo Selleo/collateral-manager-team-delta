@@ -14,10 +14,29 @@ ActiveAdmin.register Lead do
   end
 
   show do
+    panel "Tags for #{lead.name}" do
+      raw_html = ""
+      lead.lead_tags.each do |lt|
+        raw_html += "<div class=\"colorfull\" style=\"background: #{lt.tag.color}\ ; margin-right:10px\">#{lt.tag.name}</div>"
+      end
+      raw raw_html
+    end
+
     panel "Collaterals for #{lead.name}" do
-      table_for Leads::SearchService.call(lead) do
+      table_for Leads::SearchService.call(lead) do |c|
         column :name
         column :collateral_kind
+
+        column :collateral_tags do |ct| 
+          #raw_html = ""
+          #c.collateral_tags.each do |ct|
+          #  raw_html += c
+            #raw_html += "<div class=\"colorfull\" style=\"background: #{ct.tag.color}\ ; margin-right:10px\">#{ct.tag.name}</div>"
+          #end
+
+          raw ct.name
+        end
+
       end
     end
   end
