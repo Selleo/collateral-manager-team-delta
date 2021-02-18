@@ -48,8 +48,8 @@ ActiveAdmin.register Collateral do
 
   form do |f|
     f.inputs 'Details' do
-      f.input :name
-      f.input :url
+      f.input :name, as: :string
+      f.input :url, as: :string
       f.input :collateral_kind
     end
     f.inputs do
