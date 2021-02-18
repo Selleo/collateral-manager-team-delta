@@ -34,8 +34,8 @@ class LeadMatchedCollateralsCollection
     tag_ids = positioned_tags.keys
     weighted_collaterals = []
 
-    CollateralTag.where(tag_id: tag_ids).each do |ct|
-      weight = ct.weight * positioned_tags[ct.tag_id]
+    CollateralTag.includes([:collateral]).where(tag_id: tag_ids).each do |ct|
+      weight = ct.weight * (positioned_tags[ct.tag_id] + 1)
       # Przypadki:
       # 1. Collateral ma "n" tagów, użytkownik wybrał "n"+"m" tagów
       # 2. Collateral ma "n" tagów a użytkownik wybrał "n"-"m" tagów
@@ -52,8 +52,10 @@ class LeadMatchedCollateralsCollection
 
   def get_ordered_collaterals
     ordered_collaterals = get_weighted_collaterals.sort_by { |w| -w[:weight] }
-    return ordered_collaterals
-    ordered_collaterals.map { |c| c['collateral'] }
+    ordered_collaterals.map do |oc|
+      oc[:collateral]
+    end
+
   end
 
   private
