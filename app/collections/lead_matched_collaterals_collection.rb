@@ -58,7 +58,5 @@ class LeadMatchedCollateralsCollection
 
   end
 
-  private
-
   attr_reader :lead
 end
