@@ -24,7 +24,9 @@ ActiveAdmin.register Lead do
 
     panel "Collaterals for #{lead.name}" do
       table_for LeadMatchedCollateralsCollection.new(lead).get do |c|
-        column :name
+        column :name do |n|
+          raw "<a href =\"/admin/collaterals/#{n.id}\" target=\"_blank\">#{n.name}</a>"
+        end
         column :collateral_kind
 
         column "MATCHED Collateral Tags" do |c| 
