@@ -27,18 +27,24 @@ ActiveAdmin.register Lead do
         column :name
         column :collateral_kind
 
-        column :collateral_tags do |c| 
+        column "MATCHED Collateral Tags" do |c| 
           raw_html = ""
           c.tags.each do |ct|
-            #lead.lead_tags.each do |lt|
-            #  if lt.tag.id = ct.id then
-            #    raw_html += "<div class=\"colorfull\" style=\"background: #{ct.color}\ ; margin-right:10px\">#{ct.name}</div>"
-            #  end
-            #end
-            raw_html += "<div class=\"colorfull\" style=\"background: #{ct.color}\ ; margin-right:10px\">#{ct.name}</div>"
+            lead.lead_tags.each do |lt|
+              if lt.tag.id == ct.id then
+                raw_html += "<div class=\"colorfull\" style=\"background: #{ct.color}\ ; margin-right:10px\">#{ct.name}</div>"
+              end
+            end
           end
           raw raw_html
-          
+        end
+
+        column "ALL Collateral Tags" do |c| 
+          raw_html = ""
+          c.tags.each do |ct|
+            raw_html += "<div\">[#{ct.name}] </div>"
+          end
+          raw raw_html
         end
       end
     end
