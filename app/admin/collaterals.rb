@@ -14,6 +14,12 @@ ActiveAdmin.register Collateral do
     column :url do |u|
       raw "<a href=\"#{u.url}\" target=\"_blank\">#{u.url}</a>"
     end
+    column :tags do |collateral|
+      collateral.tags.map do |tag|
+        span tag.name, class: 'colorfull', style: "background: #{tag.color}80; margin: 0 8px 8px 0"
+      end
+      nil #NOTE: active admin renders duplicated tags, nil forces to skip showing duplicated tags
+    end
     actions
   end
 
@@ -27,7 +33,7 @@ ActiveAdmin.register Collateral do
         end
         row 'Tags' do
           collateral.tags.each do |tag|
-            span tag.name, class: 'colorfull', style: "background: #{tag.color}; margin: 0 16px 16px 0"
+            span tag.name, class: 'colorfull', style: "background: #{tag.color}80; margin: 0 8px 8px 0"
           end
           nil #NOTE: active admin renders duplicated tags, nil forces to skip showing duplicated tags
         end

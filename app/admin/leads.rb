@@ -9,6 +9,12 @@ ActiveAdmin.register Lead do
     id_column
     column :name
     column :description
+    column :tags do |collateral|
+      collateral.tags.map do |tag|
+        span tag.name, class: 'colorfull', style: "background: #{tag.color}80; margin: 0 8px 8px 0"
+      end
+      nil #NOTE: active admin renders duplicated tags, nil forces to skip showing duplicated tags
+    end
     actions
   end
 
