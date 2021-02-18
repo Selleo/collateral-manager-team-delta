@@ -19,10 +19,40 @@ ActiveAdmin.register Lead do
   end
 
   show do
+    panel "Tags for #{lead.name}" do
+      raw_html = ""
+      lead.lead_tags.each do |lt|
+        raw_html += "<div class=\"colorfull\" style=\"background: #{lt.tag.color}\ ; margin-right:10px\">#{lt.tag.name}</div>"
+      end
+      raw raw_html
+    end
+
     panel "Collaterals for #{lead.name}" do
-      table_for Leads::SearchService.call(lead) do
-        column :name
+      table_for LeadMatchedCollateralsCollection.new(lead).get do |c|
+        column :name do |n|
+          raw "<a href =\"/admin/collaterals/#{n.id}\" target=\"_blank\">#{n.name}</a>"
+        end
         column :collateral_kind
+
+        column "MATCHED Collateral Tags" do |c| 
+          raw_html = ""
+          c.tags.each do |ct|
+            lead.lead_tags.each do |lt|
+              if lt.tag.id == ct.id then
+                raw_html += "<div class=\"colorfull\" style=\"background: #{ct.color}\ ; margin-right:10px\">#{ct.name}</div>"
+              end
+            end
+          end
+          raw raw_html
+        end
+
+        column "ALL Collateral Tags" do |c| 
+          raw_html = ""
+          c.tags.each do |ct|
+            raw_html += "<div\">[#{ct.name}] </div>"
+          end
+          raw raw_html
+        end
       end
     end
   end
@@ -46,5 +76,4 @@ ActiveAdmin.register Lead do
         f.button :submit
     end
   end
-
 end
