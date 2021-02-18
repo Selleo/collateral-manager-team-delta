@@ -6,9 +6,9 @@ module Api
       end
 
       def show
-        collateral_id = params[:id]
+        lead_id = params[:id]
 
-        render json: Leads::ShowService.call(collateral_id)
+        render json: Leads::ShowService.call(lead_id)
       end
 
       def create
