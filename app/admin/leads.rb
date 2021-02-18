@@ -1,7 +1,6 @@
 ActiveAdmin.register Lead do
 
   config.create_another = true
-  permit_params :name, :description, :lead_tags_attributes => [:id, :tag_id, :position, :lead_id]
 
   filter :name
   filter :description
@@ -22,16 +21,20 @@ ActiveAdmin.register Lead do
     end
   end
 
+  permit_params :name,
+                :description,
+                lead_tags_attributes: [:id, :tag_id, :position, :lead_id]
+
+
   form title: 'Adding a Lead' do |f|
     inputs 'Details' do
       f.semantic_errors *f.object.errors.keys
       f.input :name
       f.input :description
-      if f.object.persisted?
-        f.has_many :lead_tags do |lead_tag_form|
-          lead_tag_form.input :tag_id, collection: Tag.all, as: :select
+      f.inputs do
+        f.has_many :lead_tags, allow_destroy: true do |lead_tag_form|
+          lead_tag_form.input :tag_id, as: :select, collection: Tag.all.pluck(:name, :id)
           lead_tag_form.input :position
-          lead_tag_form.input :lead_id, :input_html => { :value => f.object.id }, as: :hidden
         end
       end
         f.button :submit
