@@ -10,7 +10,7 @@ module Tags
     end
 
     def call
-      tag.update(name: dto.get_name, color: dto.get_color)
+      tag.update(name: dto.name, color: dto.color)
       tag
     end
 

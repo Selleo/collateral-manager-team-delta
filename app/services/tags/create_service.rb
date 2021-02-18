@@ -9,7 +9,7 @@ module Tags
     end
 
     def call
-      Tag.create(name: dto.get_name, color: dto.get_color)
+      Tag.create(name: dto.name, color: dto.color)
     end
 
     private

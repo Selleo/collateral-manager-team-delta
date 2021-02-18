@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :collaterals, only: [:show, :index, :create, :update, :destroy]
       resources :tags, only: [:index, :create, :update, :destroy]
       resources :collateral_kinds, only: [:index, :create, :update, :destroy]
-      resources :leads, only: [:index, :create]
+      resources :leads, only: [:index, :show, :create]
     end
   end
 end
