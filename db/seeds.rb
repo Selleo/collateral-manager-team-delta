@@ -8,9 +8,9 @@
 
 require 'faker'
 
-COLLATERALS_COUNT = 50
-LEADS_COUNT = 10
-TAGS_COUNT = 150
+COLLATERALS_COUNT = 5
+LEADS_COUNT = 5
+TAGS_COUNT = 10
 
 def generate_collateral_kinds
   kinds_ids = []

@@ -11,7 +11,7 @@ module Collaterals
     private
 
     def collection
-      Collateral.all.map do |collateral|
+      Collateral.includes([:collateral_kind, :tags]).all.map do |collateral|
         {
           id: collateral.id,
           name: collateral.name,

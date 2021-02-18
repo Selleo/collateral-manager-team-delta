@@ -17,8 +17,6 @@ ActiveAdmin.register Collateral do
     actions
   end
 
-  permit_params :name, :color, :actions, :url, :collateral_kind_id
-
   show do
     panel "Collateral details" do
       attributes_table_for collateral do
@@ -36,5 +34,26 @@ ActiveAdmin.register Collateral do
       end
     end
   end
+
+  permit_params :name,
+                :url,
+                :collateral_kind_id,
+                collateral_tags_attributes: [:id, :tag_id, :weight, :_destroy]
+
+  form do |f|
+    f.inputs 'Details' do
+      f.input :name
+      f.input :url
+      f.input :collateral_kind
+    end
+    f.inputs do
+      f.has_many :collateral_tags, allow_destroy: true do |t|
+        t.input :tag_id, :as => :select, :collection => Tag.pluck(:name, :id)
+        t.input :weight, :as => :number
+      end
+    end
+    f.actions
+  end
+
 
 end
