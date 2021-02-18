@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => redirect('/admin')
+  root :to => redirect('/admin/leads')
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
