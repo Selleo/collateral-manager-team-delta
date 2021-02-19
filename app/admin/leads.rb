@@ -68,10 +68,12 @@ ActiveAdmin.register Lead do
       f.semantic_errors *f.object.errors.keys
       f.input :name
       f.input :description
-      f.inputs do
-        f.has_many :lead_tags, allow_destroy: true do |t|
-          t.input :tag_id, :as => :select, :collection => Tag.pluck(:name, :id)
-          t.input :position, :as => :number
+      li do
+        f.inputs heading: true do
+          f.has_many :lead_tags, allow_destroy: true do |t|
+            t.input :tag_id, :as => :select, :collection => Tag.pluck(:name, :id)
+            t.input :position, :as => :hidden
+          end
         end
       end
       f.actions

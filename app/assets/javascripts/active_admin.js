@@ -1,26 +1,33 @@
 //= require active_admin/base
 
 $(document).ready(function () {
-    console.log('ready');
+    let wasInitialized = false;
 
-    $(function () {
-        $(".lead_tags .inputs").sortable({});
-        $(".lead_tags .inputs").disableSelection();
+    $(".button.has_many_add").on('click', function () {
+        setTimeout(() => {
+            if (!wasInitialized) {
+                $(".lead_tags .inputs").sortable({});
+                $(".lead_tags .inputs").disableSelection();
+            } else {
+                $(".lead_tags .inputs").sortable('refresh');
+            }
+        }, 500);
     });
 
-    $("button")
-        .last()
-        .on()
-        .click((e) => {
-            e.preventDefault();
+    if ($(".lead_tags .inputs").length) {
+        $(".lead_tags .inputs").sortable({});
+        $(".lead_tags .inputs").disableSelection();
+        wasInitialized = true;
+    }
 
-            const inputs = $(".drag");
+    $("#lead_submit_action").on('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
 
-            inputs.each(function (index, value) {
-                console.log(index + ": " + $(this).text(), value);
-                const currInput = inputs[index];
-                $(value).html(index + 1);
-            });
-            $(".lead").submit();
-        });
+        $(".lead_tags .inputs").each((function (index, el) {
+            $(el).find('li.hidden.input input').val(index);
+        }));
+
+        $('form.lead').trigger('submit');
+    });
 });
