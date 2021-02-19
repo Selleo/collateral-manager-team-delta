@@ -1,9 +1,11 @@
 //= require active_admin/base
 
 $(document).ready(function () {
+    console.log('ready');
+
     $(function () {
-        $("#sortable").sortable({});
-        $("#sortable").disableSelection();
+        $(".lead_tags .inputs").sortable({});
+        $(".lead_tags .inputs").disableSelection();
     });
 
     $("button")

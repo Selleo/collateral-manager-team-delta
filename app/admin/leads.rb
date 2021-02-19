@@ -9,7 +9,7 @@ ActiveAdmin.register Lead do
 
   permit_params :name,
                 :description,
-                lead_tags_attributes: [:id, :tag_id, :position, :lead_id]
+                lead_tags_attributes: [:id, :tag_id, :position, :lead_id, :_destroy]
 
   index do
     id_column
@@ -63,19 +63,18 @@ ActiveAdmin.register Lead do
     end
   end
 
-  form title: 'Adding a Lead' do |f|
+  form do |f|
     inputs 'Details' do
       f.semantic_errors *f.object.errors.keys
       f.input :name
       f.input :description
-      if f.object.persisted?
-        f.has_many :lead_tags do |lead_tag_form|
-          lead_tag_form.input :tag_id, collection: Tag.all, as: :select
-          lead_tag_form.input :position
-          lead_tag_form.input :lead_id, :input_html => { :value => f.object.id }, as: :hidden
+      f.inputs do
+        f.has_many :lead_tags, allow_destroy: true do |t|
+          t.input :tag_id, :as => :select, :collection => Tag.pluck(:name, :id)
+          t.input :position, :as => :number
         end
       end
-      f.button :submit
+      f.actions
     end
   end
 end
