@@ -17,17 +17,17 @@ module Leads
       }
 
       lead_matched_collaterals = LeadMatchedCollateralsCollection.new(lead)
-
+      return lead_matched_collaterals.get
       collaterals = lead_matched_collaterals.get.map do |collateral|
         {
           id: collateral.id,
           name: collateral.name,
-          url: collateral.url,
-          kind: {
-            name: collateral.collateral_kind.name,
-            color: collateral.collateral_kind.color
-          },
-          tags: collateral.tags.map { |c| c.slice(:name, :color) }
+          # url: collateral.url,
+          # kind: {
+          #   name: collateral.collateral_kind.name,
+          #   color: collateral.collateral_kind.color
+          # },
+          # tags: collateral.tags.map { |c| c.slice(:name, :color) }
         }
       end
       result['collaterals'] = collaterals

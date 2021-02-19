@@ -21,7 +21,7 @@ _collateral_weight = sum(collateral_tag_weight * position) - not_matched_tags_co
 3. Setup Leads:
 - Lead 1: [Tag 1: 0] [Tag 2: 1] [Tag 3: 2]
 - Lead 2: [Tag 5: 0] [Tag 1: 1]
-2. Setup Collaterals: 
+2. Setup Collaterals: s
 - Collateral 1: [Tag 1: 10] [Tag 5: 9] [Tag 2: 3] [Tag 4: 9]
 - Collateral 2: [Tag 2: 6] [Tag 3: 9]
 - Collateral 3: [Tag 1: 10] [Tag 2: 9] [Tag 3: 10]
@@ -31,13 +31,14 @@ _collateral_weight = sum(collateral_tag_weight * position) - not_matched_tags_co
 
 3. Expectation for Lead 1:
 - Collateral 3 => weight: ((10 * 3) + (9 * 2) + (10 * 1)) - 0 = 58
-- Collateral 1 => weight: ((10 * 3) + (3 * 2)) - 2 = 34
+- Collateral 1 => weight: ((10 * 3) + (3 * 2)) - 3 = 33
+- Collateral 4 => weight: ((10 * 3)) - 3 = 27
 - Collateral 2 => weight: ((6 * 2) + (9 * 1)) - 1 = 20
 
 4. Expectation for Lead 2:
-- Collateral 1 => weight: ((5 * 2) + (10 * 1)) - 2 = 18
+- Collateral 1 => weight: ((9 * 2) + (10 * 1)) - 2 = 26
 - Collateral 5 => weight: ((7 * 2)) - 1 = 13
-- Collateral 4 => weight: ((10 * 1)) - 1 = 9
-- Collateral 3 => weight: ((10 * 1)) - 2 = 8
+- Collateral 4 => weight: ((10 * 1)) - 2 = 8
+- Collateral 3 => weight: ((10 * 1)) - 3 = 7
 - Collateral 6 => weight: ((3 * 2)) - 2 = 4
 
