@@ -1,67 +1,43 @@
 # Collateral manager
 
-## Getting Started
+### Struktura bazy danych
 
-After you have cloned this repo, run this setup script to set up your machine
-with the necessary dependencies to run and test this app:
-
-    % ./bin/setup
-
-It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
-your machine with [this script].
-
-[this script]: https://github.com/thoughtbot/laptop
-
-After setting up, you can run the application using [Heroku Local]:
-
-    % heroku local
-
-[Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
-
-## Guidelines
-
-Use the following guides for getting things done, programming well, and
-programming in style.
-
-* [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
-* [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
-* [Style](http://github.com/thoughtbot/guides/blob/master/style)
-## Configuration
-
-Environment variables during local development are handled by the node-foreman
-project runner. To provide environment variables, create a `.env` file at the
-root of the project. In that file provide the environment variables listed in
-`.sample.env`. The `bin/setup` script does this for you, but be careful about
-overwriting your existing `.env` file.
-
-`app.json` also contains a list of environment variables that are required for
-the application. The `.sample.env` file provides either non-secret vars that
-can be copied directly into your own `.env` file or instructions on where to
-obtain secret values.
-
-During development add any new environment variables needed by the application
-to both `.sample.env` and `app.json`, providing either **public** default
-values or brief instructions on where secret values may be found.
-
-Do not commit the `.env` file to the git repo.
-
-## Running the Application
-
-Use the `heroku local` runner to run the app locally as it would run on Heroku.
-This uses the node-forman runner, which reads from the `Procfile` file.
-
-```sh
-heroku local
-```
-
-Once the server is started the application is reachable at
-`http://localhost:3000`.
+![Alt text](docs/CollateralManager_DELTA.png?raw=true "Title")
 
 
-## Profiler
+### Wzór wyznaczania wagi
 
-The [rack-mini-profiler] gem can be enabled by setting
-`RACK_MINI_PROFILER=1` in the environment. This will display a speed
-badge on every page.
+**position** = abs(lead_tags.length - lead_tag_position)
 
-[rack-mini-profiler]: https://github.com/MiniProfiler/rack-mini-profiler
+**not_matched_tags_count** = abs(collateral_tags.length - lead_tags.length)
+
+_collateral_weight = sum(collateral_tag_weight * position) - not_matched_tags_count_
+
+
+### Scenariusz testowy 
+
+1. Setup Tags: [Tag 1] [Tag 2] [Tag 3] [Tag 4] [Tag 5]
+2. Setup Collateral Kinds: [Collateral Kind 1] [Collateral Kind 2]
+3. Setup Leads:
+- Lead 1: [Tag 1: 0] [Tag 2: 1] [Tag 3: 2]
+- Lead 2: [Tag 5: 0] [Tag 1: 1]
+2. Setup Collaterals: 
+- Collateral 1: [Tag 1: 10] [Tag 5: 9] [Tag 2: 3] [Tag 4: 9]
+- Collateral 2: [Tag 2: 6] [Tag 3: 9]
+- Collateral 3: [Tag 1: 10] [Tag 2: 9] [Tag 3: 10]
+- Collateral 4: [Tag 1: 10] [Tag 4: 5] 
+- Collateral 5: [Tag 5: 7]
+- Collateral 6: [Tag 4: 5] [Tag 5: 3]
+
+3. Expectation for Lead 1:
+- Collateral 3 => weight: ((10 * 3) + (9 * 2) + (10 * 1)) - 0 = 58
+- Collateral 1 => weight: ((10 * 3) + (3 * 2)) - 2 = 34
+- Collateral 2 => weight: ((6 * 2) + (9 * 1)) - 1 = 20
+
+4. Expectation for Lead 2:
+- Collateral 1 => weight: ((5 * 2) + (10 * 1)) - 2 = 18
+- Collateral 5 => weight: ((7 * 2)) - 1 = 13
+- Collateral 4 => weight: ((10 * 1)) - 1 = 9
+- Collateral 3 => weight: ((10 * 1)) - 2 = 8
+- Collateral 6 => weight: ((3 * 2)) - 2 = 4
+
