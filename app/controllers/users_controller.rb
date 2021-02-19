@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < ApiController
   before_action :authorized, only: [:auto_login]
 
   # LOGGING IN
