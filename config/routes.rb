@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  post "api/login", to: "users#login"
+
   namespace :api do
     namespace :v1 do
       resources :collaterals, only: [:show, :index, :create, :update, :destroy]

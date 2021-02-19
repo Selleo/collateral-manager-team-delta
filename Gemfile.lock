@@ -171,6 +171,7 @@ GEM
       turbolinks
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    jwt (2.2.2)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
@@ -412,6 +413,7 @@ DEPENDENCIES
   activeadmin
   autoprefixer-rails
   awesome_print
+  bcrypt
   bootsnap
   bourbon (>= 6.0.0)
   bullet
@@ -428,6 +430,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  jwt
   launchy
   listen
   oj
