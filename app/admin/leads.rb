@@ -12,7 +12,7 @@ ActiveAdmin.register Lead do
                 lead_tags_attributes: [:id, :tag_id, :position, :lead_id, :_destroy]
 
   index do
-    id_column
+    selectable_column
     column :name
     column :description
     column :tags do |collateral|
