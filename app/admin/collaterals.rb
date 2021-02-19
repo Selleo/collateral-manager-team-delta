@@ -7,10 +7,10 @@ ActiveAdmin.register Collateral do
 
   index do |i|
     selectable_column
+    column :name
     column :collateral_kinds_id do |ck|
       raw "<span class=\"colorfull\" style=\"background:#{ck.collateral_kind&.color}\">#{ck.collateral_kind&.name}</span>"
     end
-    column :name
     column :url do |u|
       raw "<a href=\"#{u.url}\" target=\"_blank\">#{u.url}</a>"
     end
