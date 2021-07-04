@@ -1,6 +1,6 @@
 module Api
   module V1
-    class CollateralKindsController < ApplicationController
+    class CollateralKindsController < ApiController
       def index
         render json: CollateralKinds::IndexService.call
       end

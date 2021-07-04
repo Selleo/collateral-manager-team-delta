@@ -1,12 +1,18 @@
 ActiveAdmin.register Lead do
 
+  menu priority: 1
+
   config.create_another = true
 
   filter :name
   filter :description
 
+  permit_params :name,
+                :description,
+                lead_tags_attributes: [:id, :tag_id, :position, :lead_id, :_destroy]
+
   index do
-    id_column
+    selectable_column
     column :name
     column :description
     column :tags do |collateral|
@@ -34,7 +40,7 @@ ActiveAdmin.register Lead do
         end
         column :collateral_kind
 
-        column "MATCHED Collateral Tags" do |c| 
+        column "MATCHED Collateral Tags" do |c|
           raw_html = ""
           c.tags.each do |ct|
             lead.lead_tags.each do |lt|
@@ -46,7 +52,7 @@ ActiveAdmin.register Lead do
           raw raw_html
         end
 
-        column "ALL Collateral Tags" do |c| 
+        column "ALL Collateral Tags" do |c|
           raw_html = ""
           c.tags.each do |ct|
             raw_html += "<div\">[#{ct.name}] </div>"
@@ -57,23 +63,18 @@ ActiveAdmin.register Lead do
     end
   end
 
-  permit_params :name,
-                :description,
-                lead_tags_attributes: [:id, :tag_id, :position, :lead_id]
-
-
-  form title: 'Adding a Lead' do |f|
+  form do |f|
     inputs 'Details' do
       f.semantic_errors *f.object.errors.keys
       f.input :name
       f.input :description
       f.inputs do
-        f.has_many :lead_tags, allow_destroy: true do |lead_tag_form|
-          lead_tag_form.input :tag_id, as: :select, collection: Tag.all.pluck(:name, :id)
-          lead_tag_form.input :position
+        f.has_many :lead_tags, allow_destroy: true do |t|
+          t.input :tag_id, :as => :select, :collection => Tag.pluck(:name, :id)
+          t.input :position, :as => :hidden
         end
       end
-        f.button :submit
+      f.actions
     end
   end
 end

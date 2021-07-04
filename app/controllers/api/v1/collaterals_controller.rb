@@ -1,6 +1,6 @@
 module Api
   module V1
-    class CollateralsController < ApplicationController
+    class CollateralsController < ApiController
       def index
         render json: Collaterals::IndexService.call
       end

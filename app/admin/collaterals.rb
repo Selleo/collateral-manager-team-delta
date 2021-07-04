@@ -7,10 +7,10 @@ ActiveAdmin.register Collateral do
 
   index do |i|
     selectable_column
+    column :name
     column :collateral_kinds_id do |ck|
       raw "<span class=\"colorfull\" style=\"background:#{ck.collateral_kind&.color}\">#{ck.collateral_kind&.name}</span>"
     end
-    column :name
     column :url do |u|
       raw "<a href=\"#{u.url}\" target=\"_blank\">#{u.url}</a>"
     end
@@ -48,8 +48,8 @@ ActiveAdmin.register Collateral do
 
   form do |f|
     f.inputs 'Details' do
-      f.input :name
-      f.input :url
+      f.input :name, as: :string
+      f.input :url, as: :string
       f.input :collateral_kind
     end
     f.inputs do

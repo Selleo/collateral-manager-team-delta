@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TagsController < ApplicationController
+    class TagsController < ApiController
       def index
         render json: Tags::IndexService.call
       end

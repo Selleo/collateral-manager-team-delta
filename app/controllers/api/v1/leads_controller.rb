@@ -1,6 +1,6 @@
 module Api
   module V1
-    class LeadsController < ApplicationController
+    class LeadsController < ApiController
       def index
         render json: Leads::IndexService.call
       end

@@ -11,6 +11,7 @@ require 'faker'
 COLLATERALS_COUNT = 5
 LEADS_COUNT = 5
 TAGS_COUNT = 10
+DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lorem augue, commodo id nibh sit amet, viverra bibendum urna. Vestibulum faucibus odio ipsum. Phasellus ut dapibus leo. Quisque quis iaculis felis. Donec vulputate tempus est, eget tempus eros vulputate nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam non eros et enim fermentum mollis. Mauris sit amet consequat metus. Vivamus maximus enim magna, at varius quam tempus vitae. Morbi risus ante, dictum ac tellus finibus, ultricies iaculis elit."
 
 def generate_collateral_kinds
   kinds_ids = []
@@ -188,6 +189,60 @@ def seed_collaterals
   puts "LeadTags: #{LeadTag.count}"
   puts '==========================================================================================='
 end
+# seed_collaterals
 
-seed_collaterals
+def test_seed
+  #Tags
+  tag_1 = Tag.create(name: "Tag 1", color: Faker::Color.hex_color)
+  tag_2 = Tag.create(name: "Tag 2", color: Faker::Color.hex_color)
+  tag_3 = Tag.create(name: "Tag 3", color: Faker::Color.hex_color)
+  tag_4 = Tag.create(name: "Tag 4", color: Faker::Color.hex_color)
+  tag_5 = Tag.create(name: "Tag 5", color: Faker::Color.hex_color)
+
+  # Collateral kinds
+  collateral_kind_1 = CollateralKind.create(name: "prototype", color: Faker::Color.hex_color)
+  collateral_kind_2 = CollateralKind.create(name: "POC", color: Faker::Color.hex_color)
+  collateral_kind_3 = CollateralKind.create(name: "post", color: Faker::Color.hex_color)
+  collateral_kind_4 = CollateralKind.create(name: "web service", color: Faker::Color.hex_color)
+
+  # Leads
+  lead_1 = Lead.create(name: "Lead 1", description: DESCRIPTION)
+  lead_1.lead_tags.create(position: 0, tag: tag_1)
+  lead_1.lead_tags.create(position: 1, tag: tag_2)
+  lead_1.lead_tags.create(position: 2, tag: tag_3)
+
+  lead_2 = Lead.create(name: "Lead 2", description: DESCRIPTION)
+  lead_2.lead_tags.create(position: 0, tag: tag_5)
+  lead_2.lead_tags.create(position: 1, tag: tag_1)
+
+  # Collaterals
+  collateral_1 = Collateral.create(name: "Collateral 1", collateral_kind: collateral_kind_1, url: Faker::Internet.url(host: Faker::Internet.unique.domain_name))
+  collateral_1.collateral_tags.create(weight: 10, tag: tag_1)
+  collateral_1.collateral_tags.create(weight: 9, tag: tag_5)
+  collateral_1.collateral_tags.create(weight: 3, tag: tag_2)
+  collateral_1.collateral_tags.create(weight: 9, tag: tag_4)
+
+  collateral_2 = Collateral.create(name: "Collateral 2", collateral_kind: collateral_kind_2, url: Faker::Internet.url(host: Faker::Internet.unique.domain_name))
+  collateral_2.collateral_tags.create(weight: 6, tag: tag_2)
+  collateral_2.collateral_tags.create(weight: 9, tag: tag_3)
+
+  collateral_3 = Collateral.create(name: "Collateral 3", collateral_kind: collateral_kind_3, url: Faker::Internet.url(host: Faker::Internet.unique.domain_name))
+  collateral_3.collateral_tags.create(weight: 10, tag: tag_1)
+  collateral_3.collateral_tags.create(weight: 9, tag: tag_2)
+  collateral_3.collateral_tags.create(weight: 10, tag: tag_3)
+
+  collateral_4 = Collateral.create(name: "Collateral 4", collateral_kind: collateral_kind_2, url: Faker::Internet.url(host: Faker::Internet.unique.domain_name))
+  collateral_4.collateral_tags.create(weight: 10, tag: tag_1)
+  collateral_4.collateral_tags.create(weight: 5, tag: tag_4)
+
+  collateral_5 = Collateral.create(name: "Collateral 5", collateral_kind: collateral_kind_4, url: Faker::Internet.url(host: Faker::Internet.unique.domain_name))
+  collateral_5.collateral_tags.create(weight: 7, tag: tag_5)
+
+  collateral_6 = Collateral.create(name: "Collateral 6", collateral_kind: collateral_kind_3, url: Faker::Internet.url(host: Faker::Internet.unique.domain_name))
+  collateral_6.collateral_tags.create(weight: 5, tag: tag_4)
+  collateral_6.collateral_tags.create(weight: 3, tag: tag_5)
+
+end
+
+test_seed
 User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

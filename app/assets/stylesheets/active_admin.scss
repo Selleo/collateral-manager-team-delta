@@ -16,13 +16,18 @@
 //
 //   .status_tag { background: #6090DB; }
 
-a.colorfull, div.colorfull, span.colorfull {padding:5px; 
-    min-width:100px; 
-    min-height:0.8em;
-    border-radius:3px; 
-    display: inline-block;
-    color:white;
-    text-shadow: 0px 0px 2px black;
-    font-weight: 600;
-    
+a.colorfull, div.colorfull, span.colorfull {
+  padding: 5px;
+  min-width: 100px;
+  min-height: 0.8em;
+  border-radius: 3px;
+  display: inline-block;
+  color: white;
+  text-shadow: 0px 0px 2px black;
+  font-weight: 600;
+}
+
+.lead_tags .inputs {
+  cursor: move;
+  background-color: #F4F4F4;
 }

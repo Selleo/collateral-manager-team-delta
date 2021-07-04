@@ -17,7 +17,6 @@ module Leads
       }
 
       lead_matched_collaterals = LeadMatchedCollateralsCollection.new(lead)
-
       collaterals = lead_matched_collaterals.get.map do |collateral|
         {
           id: collateral.id,
